@@ -32,7 +32,7 @@ class OrderRouter {
       Object.assign(instance, body);
       validate(instance).then(errors => {
         if (errors.length > 0) {
-          throw new BadRequestErrorException(JSON.stringify(errors));
+          res.status(400).json({ error: "Bad request", messages: errors });
         } else {
           next();
         }

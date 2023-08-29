@@ -1,13 +1,13 @@
 import amqp from "amqplib";
 
-// Reception message service for getting infraestucture logic
+// servicio de recepción de mensajes para abstraer la lógica de infraestructure
 export default class ReceiveMessageService {
   static async orderConfirmedOrRejected(
     channel: amqp.Channel, // channel
-    cb: (message: unknown) => void, // Callback for message process
-    exchangeName: string, // exchange name
-    exchangeType: string, // exchange type
-    routingKey: string // Knowledge key for comunication between the exchange and queue
+    cb: (message: unknown) => void, // callback para procesar el mensaje
+    exchangeName: string, // nombre del intercambiador
+    exchangeType: string, // tipo del intercambiador
+    routingKey: string // llaves de reconocimiento para la comunicación entre el exchange y la colas
   ) {
     await channel.assertExchange(exchangeName, exchangeType, { durable: true });
 
@@ -17,8 +17,6 @@ export default class ReceiveMessageService {
 
     channel.consume(assertQueue.queue, message => cb(message), {
       noAck: false
-      // noAck: true => notify by default that process is OK!
-      // noAck: false => notify that process is OK when resolve it!
     });
   }
 }

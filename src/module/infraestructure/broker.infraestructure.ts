@@ -1,6 +1,7 @@
 import { BrokerRepository } from "../domain/repositories/broker.repository";
 import BrokerBootstrap from "../../bootstrap/broker.bootstrap";
 import ReceiveMessageService from "./services/receive-message.service";
+// import { Message } from "amqplib";
 
 export default class BrokerInfraestructure implements BrokerRepository {
   async sent(message: unknown): Promise<unknown> {

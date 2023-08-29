@@ -14,7 +14,7 @@ const broker = new BrokerBootstrap();
 
 const orderInfraestructure: OrderRepository = new OrderInfraestructure();
 const brokerInfraestructure: BrokerRepository = new BrokerInfraestructure();
-const orderApplication = new OrderApplication(
+const orderApplication: OrderApplication = new OrderApplication(
   orderInfraestructure,
   brokerInfraestructure
 );
@@ -24,9 +24,15 @@ const brokerController = new BrokerController(orderApplication);
 // Alternativa 1 de ejecución
 (async () => {
   try {
-    await server.initialize();
-    await database.initialize();
-    await broker.initialize();
+    // await server.initialize();
+    // await database.initialize();
+    // await broker.initialize();
+    const listPromises = [
+      server.initialize(),
+      database.initialize(),
+      broker.initialize()
+    ];
+    await Promise.all(listPromises);
     await brokerController.listen();
   } catch (error) {
     console.log(error);

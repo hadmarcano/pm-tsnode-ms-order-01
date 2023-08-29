@@ -7,17 +7,17 @@ import {
 } from "class-validator";
 
 export class InsertValidator {
-  // Design patern: Decorator
+  // Design Pattern Decorator: https://refactoring.guru/es/design-patterns/decorators
 
   @IsUUID()
   @IsNotEmpty({ message: "Guid must not be empty" })
-  @IsString({ message: "Must be a string" })
+  @IsString({ message: "Guid must be a string" })
   @MinLength(10, { message: "Guid is too short" })
-  productId: string;
+  productId!: string;
 
   @IsNumber()
-  price: number;
+  price!: number;
 
   @IsNumber()
-  quantity: number;
+  quantity!: number;
 }

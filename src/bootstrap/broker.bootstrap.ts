@@ -9,6 +9,7 @@ import { Bootstrap } from "./bootstrap";
 // broker.channel
 // #NOTA: Las propiedades/métodos estaticos sólo pueden usar dentro
 // contextos "static", en este caso se pueden apuntar con "this".
+
 export default class BrokerBootstrap extends Bootstrap {
   static channel: amqp.Channel;
 
@@ -20,6 +21,7 @@ export default class BrokerBootstrap extends Bootstrap {
         const connection = await amqp.connect(`amqp://${host}`);
         BrokerBootstrap.channel = await connection.createChannel();
         console.log("Connected to RabbitMQ");
+        resolve(true);
       } catch (error) {
         console.log(error);
         reject(error);
