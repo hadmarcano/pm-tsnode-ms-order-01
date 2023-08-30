@@ -7,13 +7,14 @@ export default class ServerBootstrap extends Bootstrap {
   // Principio SOLID: Single Responsability
   initialize(): Promise<boolean | Error> {
     return new Promise((resolve, reject) => {
+      const port = process.env.PORT || 4000;
       const server = http.createServer(app);
 
       server
-        .listen(4000)
+        .listen(port)
         .on("listening", () => {
           resolve(true);
-          console.log("Server started in port 4000");
+          console.log(`Server started in port ${port}`);
         })
         .on("error", err => {
           reject(err);

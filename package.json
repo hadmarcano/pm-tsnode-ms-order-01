@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.ts",
     "prettier:check": "prettier --check src/**/*.{ts,json}",
     "prettier:fix": "prettier --write src/**/*.{ts,json}",
-    "build": "npm run clean && tsc && gulp minify"
+    "build": "npm run clean && tsc && gulp minify",
+    "serve": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
